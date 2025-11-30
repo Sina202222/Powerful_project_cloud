@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: django_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DEBUG=1
+    depends_on:
+      - db
+
+  frontend:  
+    build: ./frontend
+    container_name: react_frontend
+    ports:
+      - "3000:80" 
+    environment:
+      - CHOKIDAR_USEPOLLING=true # برای auto reload در کانتینر
+
+  db:
+    image: postgres:13
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+volumes:
+  postgres_data:
