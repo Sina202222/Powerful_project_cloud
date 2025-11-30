@@ -12,9 +12,14 @@ django  djangorestframework
 
 pip install
 
+pip freeze > requirements.txt
+
+git remote add origin https://github.com/Sina202222/Powerful_project_cloud.git
 
 
 django-admin startproject core . 
+
+py manage.py startapp api
 
 py manage.py migrate
 
